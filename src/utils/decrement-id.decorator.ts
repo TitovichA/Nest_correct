@@ -1,0 +1,12 @@
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+
+export const DecrementId = createParamDecorator(
+  (data: string[], ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    data.forEach((element) => {
+      const value = request.query[element];
+      request.query[element] = value - 1;
+    });
+    return data;
+  },
+);

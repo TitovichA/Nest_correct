@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .card {
+            border: 1px solid palevioletred;
+            margin: 2px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">${newsItem.name}</h3>
+            <div class="card-subtitle mb-2 text-muted">
+                Автор: ${newsItem.description}
+            </div>
+            <div class="card-subtitle mb-2 text-muted">
+                Дата создания: ${newsItem.createdAt}
+            </div>
+            <p class="card-text">${newsItem.text}</p>
+            <button id="detail_butt">detail</button>            
+            <a href="http://localhost:3000/news/get-one?id=${newsItem.id}">detail</a>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod perferendis corrupti nostrum nisi, eum reprehenderit temporibus porro tempora repellat. Dolor nemo rem recusandae sit at earum atque temporibus pariatur quibusdam.
+        </div>
+    </div>
+    <script>
+        const detailButt = document.getElementById('detail_butt');
+        detailButt.addEventListener('click', (e) => {
+
+        });
+    </script>
+</body>
+
+</html>
