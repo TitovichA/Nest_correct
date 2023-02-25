@@ -9,6 +9,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { NewsEntity } from './news.entity';
+import { UsersEntity } from './user.entity';
 
 @Entity('comments')
 export class CommentEntity {
@@ -23,9 +24,6 @@ export class CommentEntity {
   })
   @JoinColumn()
   news!: NewsEntity;
-
-  @Column()
-  newsId!: number;
 
   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
   createdAt!: Date;
