@@ -8,6 +8,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { CommentEntity } from './comment.entity';
+import { UsersEntity } from './user.entity';
 
 @Entity('news')
 export class NewsEntity {

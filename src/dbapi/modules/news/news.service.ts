@@ -16,7 +16,7 @@ export class NewsService {
   }
 
   async create(news: NewsEntity) {
-    let old = await this.findById(Number(news?.id));
+    let old = news.id && (await this.findById(Number(news.id)));
     if (old) {
       old.title = news.title;
       old.description = news.description;

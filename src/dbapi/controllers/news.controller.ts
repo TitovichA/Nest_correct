@@ -5,7 +5,7 @@ import {
   Delete,
   Get,
   Post,
-  Render,
+  UseGuards,
   Query,
   UseInterceptors,
   UploadedFile,
@@ -18,6 +18,9 @@ import { diskStorage } from 'multer';
 import { HelperFileLoader } from '../../utils/HelperFileLoader';
 import { LoggingInterceptor } from '../modules/logger/logger.interceptor';
 import { NewsEntity } from '../database/entities/news.entity';
+import { AuthGuard } from '../auth/auth-guard';
+import { Roles } from '../auth/roles-decorator';
+import { RolesGuard } from '../auth/roles-guard';
 
 const PATH_NEWS = 'news-static/';
 const helperFileLoader = new HelperFileLoader();
@@ -27,6 +30,8 @@ helperFileLoader.path = PATH_NEWS;
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
 
+  @Roles('User')
+  @UseGuards(RolesGuard)
   @Post('create') // if exist id - update
   @UseInterceptors(
     LoggingInterceptor,
@@ -74,6 +79,8 @@ export class NewsController {
     res.render('news-one', { layout: 'index', news: news });
   }
 
+  @Roles('Admin')
+  @UseGuards(RolesGuard)
   @Delete('delete')
   async deleteNews(@Body() body: NewsIdDto): Promise<NewsEntity | undefined> {
     return this.newsService.remove(body.id);
