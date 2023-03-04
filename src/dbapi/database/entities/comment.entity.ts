@@ -19,6 +19,12 @@ export class CommentEntity {
   @Column()
   text!: string;
 
+  @ManyToOne(() => UsersEntity, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn()
+  user!: UsersEntity;
+
   @ManyToOne(() => NewsEntity, {
     onDelete: 'CASCADE',
   })
