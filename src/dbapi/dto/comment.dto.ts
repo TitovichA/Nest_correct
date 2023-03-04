@@ -13,4 +13,6 @@ export class CommentDTO {
 
   @IsString()
   text!: string;
+
+  user!: any;
 }

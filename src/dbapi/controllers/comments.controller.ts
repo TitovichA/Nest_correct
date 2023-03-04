@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Post,
-  Put,
-  Query,
-  Render,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CommentEntity } from '../database/entities/comment.entity';
 import { CommentDTO } from '../dto/comment.dto';
 import { CommentsService } from '../modules/comments/comments.service';
@@ -16,25 +7,11 @@ import { CommentsService } from '../modules/comments/comments.service';
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
-  @Get('template')
-  @Render('index')
-  getTemplate(): { message: string } {
-    return { message: 'Hello world!' };
-  }
-
-  @Get('/')
-  async getComments(): Promise<CommentEntity[]> {
-    return this.commentsService.findAll();
-  }
-
-  @Get('get-one')
-  async getNewsComments(
-    @Query()
-    query: {
-      newsId: number;
-    },
-  ): Promise<CommentEntity | undefined> {
-    return this.commentsService.findById(query.newsId);
+  @Get('all')
+  async getComments(
+    @Query() query: { newsId: string },
+  ): Promise<CommentEntity[] | undefined> {
+    return this.commentsService.findById(Number(query.newsId));
   }
 
   @Post('create')

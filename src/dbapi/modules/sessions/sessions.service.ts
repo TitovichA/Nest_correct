@@ -11,7 +11,10 @@ export class SessionsService {
   ) {}
 
   getByToken(token: string) {
-    return this.sessionsRepository.findOne({ token: token });
+    return this.sessionsRepository.findOne({
+      where: { token },
+      relations: ['user'],
+    });
   }
 
   createItem(item: Session) {
